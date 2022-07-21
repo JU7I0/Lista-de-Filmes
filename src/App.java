@@ -13,14 +13,16 @@ public class App {
 
         // Criar conexão HTTP e bustar os top 250 filmes
 
-        String url = "https://api.mocki.io/v2/549a5d8b"; // URL da API com 250 filmes
+        String url = "https://api.mocki.io/v2/549a5d8b/Top250Movies"; // URL da API com 250 filmes
         URI rota = URI.create(url);
         HttpClient client = HttpClient.newHttpClient(); // criando Client
         HttpRequest request = HttpRequest.newBuilder(rota).GET().build(); 
         HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
         String corpo = response.body();
+        System.out.println(corpo);
 
-        // pegar só os dados que interessam (Titulo, imagem e avaliação)
+
+        // fazer saparação do json
 
         var parser = new JsonParser(); 
         List<Map<String, String>> listaDeFilmes = parser.parse(corpo);
